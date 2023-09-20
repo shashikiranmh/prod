@@ -4,11 +4,13 @@ pipeline {
             label 'maven'
         }
     }
-
+environments {
+    PATH = "/opt/apache-maven-3.9.4/bin:$PATH"
+}
     stages {
-        stage('clone repo') {
+        stage( 'build code') {
             steps {
-                git branch: 'main', url: 'https://github.com/shashikiranmh/stage.git'
+               sh 'mvn clean deploy'
             }
         }
     }
